@@ -42,9 +42,9 @@
 
 
 #### Post a conversation
+##### socket.io
 
-```socket.io
-   event => "send_message"
+```   event => "send_message"
 ```
 
 | Parameter | Type     | Description                |  Request   |
