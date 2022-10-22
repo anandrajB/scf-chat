@@ -10,14 +10,9 @@ db = connect_db().finflo_chat
 config_bp = Blueprint('config_bp', __name__, url_prefix='/config')
 
 
-@config_bp.route('/')
-def index():
-    return render_template('index.html')
-
-
-@config_bp.route('/config', methods=['POST'])
+@config_bp.route('/create_config', methods=['POST'])
 @cross_origin('*')
-def config():
+def create_config():
 
     config = db.config
 
