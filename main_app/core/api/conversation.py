@@ -12,89 +12,89 @@ db = connect_db().finflo_chat
 conversation_bp = Blueprint('conversation_bp', __name__, url_prefix='/conv')
 
 
-@conversation_bp.route('/conversation', methods=['GET', 'POST'])
-@cross_origin('*')
-def conversation():
+# @conversation_bp.route('/conversation', methods=['GET', 'POST'])
+# @cross_origin('*')
+# def conversation():
 
-    conversation = db.conversation
+#     conversation = db.conversation
 
-    if request.method == 'POST':
-        data = request.json
+#     if request.method == 'POST':
+#         data = request.json
 
-        try:
+#         try:
 
-            current_conv = None
+#             current_conv = None
 
-            try:
+#             try:
 
-                current_conv = conversation.find_one(
-                    {'config_id': data['config_id'], 'members': data['members']})
+#                 current_conv = conversation.find_one(
+#                     {'config_id': data['config_id'], 'members': data['members']})
 
-                message = {'text': data['text'],
-                           'time': datetime.datetime.utcnow(),
-                           'sender': data['sender'],
-                           'is_read': data['is_read']}
+#                 message = {'text': data['text'],
+#                            'time': datetime.datetime.utcnow(),
+#                            'sender': data['sender'],
+#                            'is_read': data['is_read']}
 
-                conversation.update_one(
-                    {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
+#                 conversation.update_one(
+#                     {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
 
-                print('updated')
+#                 print('updated')
 
-            except Exception as e:
-                current_conv = None
+#             except Exception as e:
+#                 current_conv = None
 
-            try:
-                # users = splitting_string(members)
+#             try:
+#                 # users = splitting_string(members)
 
-                if not current_conv:
+#                 if not current_conv:
 
-                    current_conv = conversation.find_one(
-                        {'config_id': data['config_id'], 'members': data['members']})
+#                     current_conv = conversation.find_one(
+#                         {'config_id': data['config_id'], 'members': data['members']})
 
-                    message = {'text': data['text'],
-                               'time': datetime.datetime.utcnow(),
-                               'sender': data['sender'],
-                               'is_read': data['is_read']}
+#                     message = {'text': data['text'],
+#                                'time': datetime.datetime.utcnow(),
+#                                'sender': data['sender'],
+#                                'is_read': data['is_read']}
 
-                    conversation.update_one(
-                        {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
+#                     conversation.update_one(
+#                         {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
 
-                print('updated')
-            except Exception as e:
+#                 print('updated')
+#             except Exception as e:
 
-                current_conv = None
-        except Exception as e:
-            raise NotFoundError(
-                'Conversation between users not found', status_code=404)
+#                 current_conv = None
+#         except Exception as e:
+#             raise NotFoundError(
+#                 'Conversation between users not found', status_code=404)
 
-        try:
-            # 2. If no conversation, create new one
+#         try:
+#             # 2. If no conversation, create new one
 
-            if not current_conv:
+#             if not current_conv:
 
-                if len(data['members']) >= 2 and data['party'] is not None:
+#                 if len(data['members']) >= 2 and data['party'] is not None:
 
-                    current_conv = conversation.insert_one(
-                        {'config_id': data['config_id'], 'members': data['members'], 'party': data['party'],
-                         'subject': data['subject'], 'message': []})
+#                     current_conv = conversation.insert_one(
+#                         {'config_id': data['config_id'], 'members': data['members'], 'party': data['party'],
+#                          'subject': data['subject'], 'message': []})
 
-                    message = {'text': data['text'],
-                               'time': datetime.datetime.utcnow(),
-                               'sender': data['sender'],
-                               'is_read': data['is_read']}
+#                     message = {'text': data['text'],
+#                                'time': datetime.datetime.utcnow(),
+#                                'sender': data['sender'],
+#                                'is_read': data['is_read']}
 
-                    conversation.update_one(
-                        {'_id': ObjectId(current_conv.inserted_id)}, {'$push': {'message': message}})
+#                     conversation.update_one(
+#                         {'_id': ObjectId(current_conv.inserted_id)}, {'$push': {'message': message}})
 
-                else:
+#                 else:
 
-                    return {"Status": "Failure", "Message": "You have to select members to initiate a chat."}, 400
+#                     return {"Status": "Failure", "Message": "You have to select members to initiate a chat."}, 400
 
-        except Exception as e:
-            raise BadReqError(
-                "Cannot able to create a conversation", status_code=400)
+#         except Exception as e:
+#             raise BadReqError(
+#                 "Cannot able to create a conversation", status_code=400)
 
-    return {"Status": "Success"}
+#     return {"Status": "Success"}
 
 
 @conversation_bp.route('/msgs')
@@ -185,7 +185,7 @@ def conversation(data):
             conversation.update_one(
                 {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
 
-            print('updated')
+            socketio.emit("received_message", message)
 
         except Exception as e:
             current_conv = None
@@ -206,7 +206,8 @@ def conversation(data):
                 conversation.update_one(
                     {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
 
-            print('updated')
+            socketio.emit("received_message", message)
+
         except Exception as e:
 
             current_conv = None
@@ -232,6 +233,8 @@ def conversation(data):
 
                 conversation.update_one(
                     {'_id': ObjectId(current_conv.inserted_id)}, {'$push': {'message': message}})
+
+                socketio.emit("received_message", message)
 
             else:
 
