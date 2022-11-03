@@ -1,4 +1,9 @@
-from flask import jsonify, render_template, Blueprint, request
+from flask import (
+    jsonify,
+    render_template,
+    Blueprint,
+    request
+)
 from flask_cors import cross_origin
 from bson.objectid import ObjectId
 from main_app.error_handler import BadReqError, NotFoundError

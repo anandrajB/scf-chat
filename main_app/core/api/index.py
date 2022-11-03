@@ -1,7 +1,11 @@
-from flask import render_template, Blueprint, request
+from flask import (
+    jsonify,
+    render_template,
+    Blueprint,
+    request
+)
 
 index_bp = Blueprint('index_bp', __name__, url_prefix='/')
-
 
 
 # HOME PAGE 

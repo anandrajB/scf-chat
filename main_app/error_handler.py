@@ -1,4 +1,11 @@
+
+
+# CUSTOM ERROR HANDLER FOR CHAT / APPLICATION EXCEPTIONS
+
+
 # To except any wrong input from the client side
+
+
 class BadReqError(Exception):
     status_code = 400
 
@@ -15,8 +22,10 @@ class BadReqError(Exception):
         rv['status_code'] = self.status_code
         return rv
 
-# To except data which are not found in the DB
 
+
+
+# To except data which are not found in the DB
 
 class NotFoundError(Exception):
     status_code = 400
