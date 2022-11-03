@@ -16,6 +16,12 @@
 1. pip install -r requirements.txt
 2. gunicorn --bind 0.0.0.0:5000 wsgi:app
 
+
+## DATABASE
+
+1. TESTING :  atlas
+2. PRODUCTION : DIGITALOCEAN MONGODB _V5
+
 ## API Reference
 #### Post a configuration - Admin only
 
