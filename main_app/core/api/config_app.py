@@ -9,6 +9,9 @@ from bson.objectid import ObjectId
 from main_app.error_handler import BadReqError, NotFoundError
 from ..utils import splitting_string
 from ..middleware import connect_db
+from ..status import Base_Values
+
+
 
 db = connect_db().finflo_chat
 
@@ -67,14 +70,14 @@ def create_config():
 
             print('Updated')
 
-            return {"Status": 'Success', "Message": "The configuration is created and xpath is inserted successfully"}
+            return {"Status": Base_Values.SUCCESS.value , "Message": "The configuration created and xpath is inserted successfully"}
 
     except Exception:
 
         raise BadReqError(
             'Configuration is not created, Check the values', status_code=400)
 
-    return jsonify({"Status": "Successfully created configuration"})
+    return jsonify({"Status": Base_Values.SUCCESS.value , "data" : Base_Values.SCC.value})
 
 
 @config_bp.route('/get_config')
