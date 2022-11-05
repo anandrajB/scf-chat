@@ -20,8 +20,14 @@
 
 ## DATABASE
 
-1. TESTING :  atlas
-2. PRODUCTION : DIGITALOCEAN MONGODB _V5
+1. TESTING :  Atlas
+2. PRODUCTION : DIGITALOCEAN MONGODB_V5
+
+
+##  URL
+
+1. TESTING : https://scfchat.herokuapp.com
+2. PRODUCTION :  under construction 
 
 
 ## API Reference
@@ -112,3 +118,4 @@
 | `config_id`| `string` | **Required**. Config Reference  | json |
 | `members` | `list` | **Required**. members of the chat |  json  |
 | `is_read` | `boolean` | **Required**. read status |  json |
+
