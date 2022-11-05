@@ -15,12 +15,15 @@ db = connect_db().finflo_chat
 config_bp = Blueprint('config_bp', __name__, url_prefix='/config')
 
 
+
+# CONFIGURATION CREATION : ADMIN LEVEL
+
 @config_bp.route('/create_config', methods=['POST'])
 @cross_origin('*')
 def create_config():
 
     config = db.config
-
+    
     data = request.json
 
     try:

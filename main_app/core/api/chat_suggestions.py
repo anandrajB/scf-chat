@@ -12,27 +12,16 @@ chat_helper = Blueprint('services', __name__, url_prefix='/services')
 def count_unread_msgs():
 
     chat_datas = db.services
-    
 
     config_id = request.args.get('data')
+    import re
+    regx = re.compile("^Can i know the limit amount", re.IGNORECASE)
 
-    # data = []
-    # print(chatter_helper.find_one())
-    # data = {
-    #         'Domain_URL': conf['keyword'],
-    #         'xpath': conf['answer']
-    #     }   
-    print(chat_datas.find_one())
+    cs = chat_datas.find_one({'Keyword': regx})
+    print(cs['Answer'])
+   
 
 
-    # for conv in conversation.find({'config_id': config_id}):
-
-    #     for msgs in conv['message']:
-
-    #         if msgs['is_read'] == False:
-
-    #             data.append(msgs)
-
-    # print(len(data))
+    # print(conv)
     return {"vanakkam": config_id}
     
