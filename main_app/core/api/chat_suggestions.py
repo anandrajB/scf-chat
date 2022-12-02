@@ -28,6 +28,7 @@ def chat_messager():
     # regx = re.compile(query_parms_Data, re.IGNORECASE)
     # if query_parms_Data:
     #     try:
+    # odm code updated
     #         base_query = chat_datas.find_one({'Keyword': query_parms_Data})
     #         return { "status": Base_Values.SUCCESS.value , "data" : random.choice(base_query['Answer'])}, 200
     #     except:
