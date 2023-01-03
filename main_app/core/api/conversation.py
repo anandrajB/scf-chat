@@ -182,10 +182,12 @@ def conversation(data):
             current_conv = conversation.find_one(
                 {'config_id': data['config_id'], 'members': data['members']})
 
-            message = {'text': data['text'],
-                       'time': datetime.datetime.utcnow(),
-                       'sender': data['sender'],
-                       'is_read': data['is_read']}
+            message = {
+                'text': data['text'],
+                'time': datetime.datetime.now(datetime.timezone.utc),
+                'sender': data['sender'],
+                'is_read': data['is_read'],
+            }
 
             conversation.update_one(
                 {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
@@ -203,10 +205,12 @@ def conversation(data):
                 current_conv = conversation.find_one(
                     {'config_id': data['config_id'], 'members': data['members']})
 
-                message = {'text': data['text'],
-                           'time': datetime.datetime.utcnow(),
-                           'sender': data['sender'],
-                           'is_read': data['is_read']}
+                message = {
+                    'text': data['text'],
+                    'time': datetime.datetime.now(datetime.timezone.utc),
+                    'sender': data['sender'],
+                    'is_read': data['is_read'],
+                }
 
                 conversation.update_one(
                     {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
@@ -218,7 +222,8 @@ def conversation(data):
             current_conv = None
     except Exception as e:
         raise NotFoundError(
-            'Conversation between users not found', status_code=404)
+            'Conversation between users not found', status_code=404
+        ) from e
 
     try:
         # 2. If no conversation, create new one
@@ -231,10 +236,12 @@ def conversation(data):
                     {'config_id': data['config_id'], 'members': data['members'], 'party': data['party'],
                      'subject': data['subject'], 'message': []})
 
-                message = {'text': data['text'],
-                           'time': datetime.datetime.utcnow(),
-                           'sender': data['sender'],
-                           'is_read': data['is_read']}
+                message = {
+                    'text': data['text'],
+                    'time': datetime.datetime.now(datetime.timezone.utc),
+                    'sender': data['sender'],
+                    'is_read': data['is_read'],
+                }
 
                 conversation.update_one(
                     {'_id': ObjectId(current_conv.inserted_id)}, {'$push': {'message': message}})
@@ -247,6 +254,7 @@ def conversation(data):
 
     except Exception as e:
         raise BadReqError(
-            "Cannot able to create a conversation", status_code=400)
+            "Cannot able to create a conversation", status_code=400
+        ) from e
 
     return {"Status": "Success"}

@@ -26,7 +26,7 @@ config_bp = Blueprint('config_bp', __name__, url_prefix='/config')
 def create_config():
 
     config = db.config
-    
+
     data = request.json
 
     try:
@@ -50,9 +50,9 @@ def create_config():
         except Exception:
 
             current_conf = None
-    except Exception:
+    except Exception as e:
 
-        raise NotFoundError("Configuration not found", status_code=404)
+        raise NotFoundError("Configuration not found", status_code=404) from e
 
     try:
         if not current_conf:
@@ -72,25 +72,31 @@ def create_config():
 
             return {"Status": Base_Values.SUCCESS.value , "Message": "The configuration created and xpath is inserted successfully"}
 
-    except Exception:
+    except Exception as e:
 
         raise BadReqError(
-            'Configuration is not created, Check the values', status_code=400)
+            'Configuration is not created, Check the values', status_code=400
+        ) from e
 
     return jsonify({"Status": Base_Values.SUCCESS.value , "data" : Base_Values.SCC.value})
 
 
-@config_bp.route('/get_config')
+
+
+
+
+
+@config_bp.route('/get_config/')
 @cross_origin('*')
 def get_config():
 
     config = db.config
+    print(config)
 
     args = request.args
     domain_url = args.get('domain_url')
 
     conf = None
-
     try:
 
         conf = config.find_one({'domain_url': domain_url})

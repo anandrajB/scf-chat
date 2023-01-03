@@ -60,7 +60,7 @@
 
 ``` 
     socket.io 
-    event => "send_message"
+    event => "messages"
 ```
 
 | Parameter | Type     | Description                |  Request   |
