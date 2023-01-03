@@ -91,7 +91,7 @@ def create_config():
 def get_config():
 
     config = db.config
-    print(config)
+    
 
     args = request.args
     domain_url = args.get('domain_url')
