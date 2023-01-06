@@ -5,8 +5,10 @@ from flask import (
     request
 )
 from flask_cors import cross_origin
-from main_app.error_handler import BadReqError, NotFoundError
-from ..utils import splitting_string
+from main_app.error_handler import (
+    BadReqError,
+    NotFoundError
+)
 from ..middleware import connect_db
 from ..status import Base_Values
 from contextlib import suppress

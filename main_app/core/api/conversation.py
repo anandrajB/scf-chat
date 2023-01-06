@@ -1,6 +1,11 @@
 import datetime
 from bson.objectid import ObjectId
-from flask import Blueprint, jsonify, render_template, request
+from flask import (
+    jsonify,
+    render_template,
+    Blueprint,
+    request
+)
 from flask_cors import cross_origin
 from main_app import socketio
 from main_app.error_handler import BadReqError, NotFoundError
