@@ -1,8 +1,8 @@
 
 
-# To handle the parsed data from the client side
+# split the list data into chunks 
 
 
 def splitting_string(string):
-    splitted_string = string.split(',')
-    return splitted_string
+    return string.split(',')
+    

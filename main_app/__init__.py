@@ -25,7 +25,7 @@ CORS(app)
 # important : import this functions once after the environ is loaded check 1.1
 
 from .core.api import (
-    config_app,
+    configuration,
     conversation,
     count,
     index,
@@ -35,7 +35,7 @@ from .core.api import (
 
 
 app.register_blueprint(index.index_bp)
-app.register_blueprint(config_app.config_bp)
+app.register_blueprint(configuration.config_bp)
 app.register_blueprint(conversation.conversation_bp)
 app.register_blueprint(count.count_bp)
 app.register_blueprint(chat_suggestions.chat_helper)
