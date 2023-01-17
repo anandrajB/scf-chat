@@ -16,6 +16,16 @@ app = Flask(__name__,  template_folder='./core/templates')
 
 app.debug = True
 
+
+# if os.environ.get('FLASK_ENV') == 'production':
+#     origins = [
+#         'http://go-concord.herokuapp.com',
+#         'https://go-concord.herokuapp.com',
+#     ]
+# else:
+#     origins = "*"
+
+
 socketio = SocketIO(app, cors_allowed_origins='*')
 
 CORS(app)
