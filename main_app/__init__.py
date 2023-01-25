@@ -26,9 +26,8 @@ app.debug = True
 #     origins = "*"
 
 
-socketio = SocketIO(app)
-socketio.init_app(app, cors_allowed_origins="*")
-CORS(app)
+socketio = SocketIO()
+
 
 
 ## 1.2 importing functions for app registry's
@@ -49,6 +48,8 @@ app.register_blueprint(configuration.config_bp)
 app.register_blueprint(conversation.conversation_bp)
 app.register_blueprint(count.count_bp)
 app.register_blueprint(chat_suggestions.chat_helper)
+socketio.init_app(app, cors_allowed_origins="*")
+CORS(app)
 
 
 @app.errorhandler(BadReqError)
