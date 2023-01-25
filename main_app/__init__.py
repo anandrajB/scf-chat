@@ -26,8 +26,8 @@ app.debug = True
 #     origins = "*"
 
 
-socketio = SocketIO(app, cors_allowed_origins='*')
-
+socketio = SocketIO(app)
+socketio.init_app(app, cors_allowed_origins="*")
 CORS(app)
 
 

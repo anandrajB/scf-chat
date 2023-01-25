@@ -168,17 +168,14 @@ def get_convos():
 
 
 
-# SOCKET IO MESSAGE BROKERING 
-## check __init__ for socket initialization
+
+@socketio.on('connect')
+def on_connect():
+    print("socket connection established")
 
 
-# @socketio.on('messages')
-# def conversation(data):
-#     conversation = db.conversation
-#     message = {"data" : data['message']}
-#     conversation.insert_one({'message' : message})
-#     socketio.emit("received_message", message)
-#     return {"Status": "Success"}
+# @socketio.disconnect()
+
 
 
 @socketio.on('messages')
