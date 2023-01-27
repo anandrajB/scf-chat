@@ -58,6 +58,5 @@ def handle_not_found_error(error):
     return response
 
 
-
 if __name__ == '__main__':
     socketio.run(app)
