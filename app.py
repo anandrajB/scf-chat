@@ -1,9 +1,9 @@
 from flask import Flask, jsonify
 from dotenv import load_dotenv
 from flask_cors import CORS
-from main_app.error_handler import BadReqError, NotFoundError
+from main.utils.error_handler import BadReqError, NotFoundError
 from flask_socketio import SocketIO
-from main_app.core.api import (
+from main.core.api import (
     configuration,
     conversation,
     count,

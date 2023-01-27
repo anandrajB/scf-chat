@@ -8,9 +8,9 @@ from flask import (
 )
 from flask_cors import cross_origin
 from ....app import socketio
-from ...error_handler import BadReqError, NotFoundError
+from ...utils.error_handler import BadReqError, NotFoundError
 from ..middleware import connect_db
-from ..utils import splitting_string
+from ..split import splitting_string
 from contextlib import suppress
 
 

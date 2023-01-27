@@ -6,8 +6,8 @@ from flask import (
 )
 from flask_cors import cross_origin
 from bson.objectid import ObjectId
-from ...error_handler import BadReqError, NotFoundError
-from ..utils import splitting_string
+from ...utils.error_handler import BadReqError, NotFoundError
+from ..split import splitting_string
 from ..middleware import connect_db
 
 db = connect_db().finflo_chat
