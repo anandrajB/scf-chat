@@ -201,7 +201,7 @@ def conversation(data):
             conversation.update_one(
                 {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
 
-            socketio.emit("received_message", message)
+            socketio.emit("messages", message)
         except Exception as e:
             current_conv = None
 
@@ -222,7 +222,7 @@ def conversation(data):
                 conversation.update_one(
                     {'_id': ObjectId(current_conv['_id'])}, {'$push': {'message': message}})
 
-            socketio.emit("received_message", message)
+            socketio.emit("messages", message)
 
         except Exception as e:
 
@@ -253,7 +253,7 @@ def conversation(data):
                 conversation.update_one(
                     {'_id': ObjectId(current_conv.inserted_id)}, {'$push': {'message': message}})
 
-                socketio.emit("received_message", message)
+                socketio.emit("messages", message)
 
             else:
                 return {"Status": "Failure", "Message": "You have to select members to initiate a chat."}, 400

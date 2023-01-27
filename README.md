@@ -3,7 +3,7 @@
 ### A Pluggable chat application
 
 # BUILD WITH FLASK==2.2.2 and MONGODB==5.0
-# gunicorn --worker-class eventlet -w 1 main_app:app
+
 
 ## Authors
 
