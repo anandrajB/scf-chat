@@ -5,7 +5,7 @@ from flask import (
     request
 )
 from flask_cors import cross_origin
-from main_app.error_handler import (
+from ...error_handler import (
     BadReqError,
     NotFoundError
 )

@@ -7,8 +7,8 @@ from flask import (
     request
 )
 from flask_cors import cross_origin
-from main_app import socketio
-from main_app.error_handler import BadReqError, NotFoundError
+from ....app import socketio
+from ...error_handler import BadReqError, NotFoundError
 from ..middleware import connect_db
 from ..utils import splitting_string
 from contextlib import suppress
