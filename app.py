@@ -21,7 +21,7 @@ load_dotenv()
 app = Flask(__name__,  template_folder='./core/templates')
 # app.config['SECRET_KEY'] = 'finflo!#Vcws2deproduction!#!!WS'
 app.debug = True
-
+CORS(app)
 
 # if os.environ.get('FLASK_ENV') == 'production':
 #     origins = [
@@ -34,11 +34,6 @@ app.debug = True
 
 # SOCKET INITIALIZATION
 socketio = SocketIO(app , cors_allowed_origins = "*")
-CORS(app)
-
-## 1.2 importing functions for app registry's
-# important : import this functions once after the environ is loaded check 1.1
-
 
 
 
