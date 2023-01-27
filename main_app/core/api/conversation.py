@@ -176,7 +176,7 @@ def on_connect():
 
 @socketio.on('disconnect')
 def on_disconnect():
-    print("socket disconnect established")
+    print("SOCKET DISCONNECT")
 
 
 
